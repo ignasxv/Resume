@@ -19,7 +19,7 @@ jobs:
 
     # Step 2: Set up LaTeX environment
     - name: Set up LaTeX environment
-      uses: dante-ev/latex-action@v2
+      uses: dante-ev/latex-action@latest
       with:
         # Specify the .tex file to build
         root_file: src.tex  # Change to your main .tex file name
