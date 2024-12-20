@@ -18,7 +18,9 @@ jobs:
 
       - name: Commit Files
         run: |
-          # rm Resume.pdf
+          ls
+          rm Resume.pdf
+          ls
           mv src.pdf Resume.pdf
           ls
           git add Resume.pdf
