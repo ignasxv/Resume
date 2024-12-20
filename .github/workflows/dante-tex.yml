@@ -1,36 +1,27 @@
-name: Build LaTeX PDF
+name: Build LaTeX document
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: 
   push:
-    paths:
-      - '**/*.tex'
-  pull_request:
-    paths:
-      - '**/*.tex'
+    branches:
+      - master
+      - main
 
 jobs:
-  build:
+  build_latex:
     runs-on: ubuntu-latest
-
     steps:
-    # Step 1: Check out the repository
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+      - name: Compile LaTeX document
+        uses: dante-ev/latex-action@latest
+        with:
+          root_file: src.tex
+          
 
-    # Step 2: Set up LaTeX environment
-    - name: Set up LaTeX environment
-      uses: dante-ev/latex-action@latest
-      with:
-        # Specify the .tex file to build
-        root_file: src.tex  # Change to your main .tex file name
-        latexmk_use_lualatex: false
-        latexmk_use_xelatex: false
-        latexmk_shell_escape: false
-
-    # Step 3: Save the generated PDF as an artifact
-    - name: Upload PDF artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: built-pdf
-        path: main.pdf  # Ensure this matches your output PDF name
+      # Step 3: Save the generated PDF as an artifact
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: built-pdf
+          path: main.pdf  # Ensure this matches your output PDF name
