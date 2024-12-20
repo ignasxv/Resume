@@ -18,6 +18,7 @@ jobs:
 
       - name: Commit Files
         run: |
+          rm test.pdf
           ls
           git add test.pdf
           git status
