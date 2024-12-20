@@ -1,0 +1,22 @@
+name: test
+on:
+  workflow_dispatch: 
+
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+      - name: Compile LaTeX document
+        uses: dante-ev/latex-action@latest
+        with:
+          root_file: test.tex
+          
+
+      # Step 3: Save the generated PDF as an artifact
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: built-pdf
+          path: main.pdf  # Ensure this matches your output PDF name

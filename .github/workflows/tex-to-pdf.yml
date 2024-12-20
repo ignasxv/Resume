@@ -1,4 +1,4 @@
-name: tex-to-pdf
+name: texgen
 
 on:
   workflow_dispatch:
