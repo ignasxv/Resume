@@ -1,0 +1,29 @@
+name: tex-to-pdf
+
+on:
+  workflow_dispatch:
+  push: {branches: ["master", "main"]}
+
+jobs:
+  update_tex:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v4
+  
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: src.tex
+
+      - name: Commit Files
+        run: |
+          rm Resume.pdf
+          mv src.pdf Resume.pdf
+          ls
+          git add Resume.pdf
+          git status
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -m "Updating Resume.pdf"
+          git push
